@@ -7,8 +7,8 @@ const stats = [
   {
     icon: Building2,
     label: "New GCC Centres Added",
-    value: 2,
-    detail: "Earlier 63 → Now 65 Total Centres",
+    value: 5,
+    detail: "Earlier 63 → Now 68 Total Centres",
   },
   {
     icon: Users,
