@@ -190,6 +190,14 @@ const config: Config = {
   				'50%': {
   					transform: 'translateY(-2px)'
   				}
+  			},
+  			'scroll': {
+  				'0%': {
+  					transform: 'translateX(0)'
+  				},
+  				'100%': {
+  					transform: 'translateX(-33.333%)'
+  				}
   			}
   		},
   		animation: {
@@ -204,7 +212,8 @@ const config: Config = {
   			'badge-out': 'badge-out 0.1s cubic-bezier(0.4, 0, 1, 1)',
   			'shimmer': 'shimmer 2s infinite',
   			'pulse-subtle': 'pulse-subtle 2s ease-in-out infinite',
-  			'bounce-subtle': 'bounce-subtle 0.6s ease-in-out infinite'
+  			'bounce-subtle': 'bounce-subtle 0.6s ease-in-out infinite',
+  			'scroll': 'scroll 20s linear infinite'
   		}
   	}
   },

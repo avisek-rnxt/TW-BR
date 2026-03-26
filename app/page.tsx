@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { ExportDialog } from "@/components/export/export-dialog"
 import { FiltersSidebar } from "@/components/filters/filters-sidebar"
 import { Header } from "@/components/layout/header"
+import { StatsBanner } from "@/components/layout/stats-banner"
 import { ErrorState } from "@/components/states/error-state"
 import { LoadingState } from "@/components/states/loading-state"
 import { AccountsTab, CentersTab } from "@/components/tabs"
@@ -510,11 +511,12 @@ function DashboardContent(): JSX.Element | null {
         Skip to main content
       </a>
       <Header onRefresh={handleRefresh} />
+      <StatsBanner />
 
       {dataLoaded && (
         <main
           id="main-content"
-          className="flex flex-1 overflow-hidden [--dashboard-content-top-gap:1.5rem] [--dashboard-content-bottom-gap:0.75rem] [--dashboard-panel-height:calc(100dvh-18.75rem)]"
+          className="flex flex-1 overflow-hidden [--dashboard-content-top-gap:1.5rem] [--dashboard-content-bottom-gap:0.75rem] [--dashboard-panel-height:calc(100dvh-20.75rem)]"
         >
           <ExportDialog
             open={exportDialogOpen}

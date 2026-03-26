@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { useTheme } from 'next-themes'
 import { Bell, CheckCheck, LogOut, Mail, Phone, RefreshCw, ShieldCheck, UserRound } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Badge } from '@/components/ui/badge'
@@ -71,6 +72,7 @@ export const Header = React.memo(function Header({ onRefresh }: HeaderProps): JS
   const environmentLabel = getEnvironmentLabel()
   const notificationsEnabled = areNotificationsEnabled()
   const router = useRouter()
+  const { resolvedTheme } = useTheme()
   const [profile, setProfile] = useState<Profile | null>(null)
   const [sessionEmail, setSessionEmail] = useState<string | null>(null)
   const [lastSignInAt, setLastSignInAt] = useState<string | null>(null)
@@ -341,6 +343,14 @@ export const Header = React.memo(function Header({ onRefresh }: HeaderProps): JS
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <p className="truncate text-lg font-bold text-foreground">Bamboo Reports</p>
+                <span className="mx-1 text-lg text-muted-foreground/50">|</span>
+                <Image
+                  src={resolvedTheme === 'dark' ? '/tw_logos/light.png' : '/tw_logos/dark.png'}
+                  alt="Thoughtworks logo"
+                  width={120}
+                  height={24}
+                  className="shrink-0 object-contain"
+                />
                 {environmentBadgeLabel ? (
                   <Badge
                     variant="outline"
