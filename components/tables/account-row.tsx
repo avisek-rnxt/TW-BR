@@ -81,7 +81,7 @@ export const AccountRow = memo(({ account, isRecentlyUpdated = false, onClick }:
                 )}
                 {isBambooReports && (
                 <div
-                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-amber-500/15 text-amber-700 dark:text-amber-300"
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#F17C1D]/15 text-[#F17C1D]"
                   title="Source: Bamboo Reports"
                 >
                   Bamboo Reports
