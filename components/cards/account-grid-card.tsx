@@ -9,10 +9,11 @@ import type { Account } from "@/lib/types"
 interface AccountGridCardProps {
   account: Account
   isRecentlyUpdated?: boolean
+  hasContacts?: boolean
   onClick: () => void
 }
 
-export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, onClick }: AccountGridCardProps) => {
+export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, hasContacts = false, onClick }: AccountGridCardProps) => {
   const location = [account.account_hq_city, account.account_hq_country]
     .filter(Boolean)
     .join(", ")
@@ -50,7 +51,7 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, onCli
             >
               {location || account.account_hq_country || "-"}
             </p>
-            {(isNasscomVerified || hasReport || isMyList || isBambooReports) && (
+            {(isNasscomVerified || hasReport || isMyList || isBambooReports || hasContacts) && (
               <div className="mt-2 flex flex-wrap items-center gap-1.5">
                 {isNasscomVerified && (
                 <div
@@ -84,6 +85,14 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, onCli
                   title="Source: Bamboo Reports"
                 >
                   Bamboo Reports
+                </div>
+                )}
+                {hasContacts && (
+                <div
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-sky-500/15 text-sky-700 dark:text-sky-300"
+                  title="Has contacts"
+                >
+                  Contacts
                 </div>
                 )}
               </div>

@@ -8,10 +8,11 @@ import { RecentlyUpdatedIndicator } from "@/components/ui/recently-updated-indic
 interface AccountRowProps {
   account: Account
   isRecentlyUpdated?: boolean
+  hasContacts?: boolean
   onClick: () => void
 }
 
-export const AccountRow = memo(({ account, isRecentlyUpdated = false, onClick }: AccountRowProps) => {
+export const AccountRow = memo(({ account, isRecentlyUpdated = false, hasContacts = false, onClick }: AccountRowProps) => {
   const location = [account.account_hq_city, account.account_hq_country]
     .filter(Boolean)
     .join(", ")
@@ -51,7 +52,7 @@ export const AccountRow = memo(({ account, isRecentlyUpdated = false, onClick }:
                 <RecentlyUpdatedIndicator title="This account has unread recent updates" />
               ) : null}
             </div>
-            {(isNasscomVerified || hasReport || isMyList || isBambooReports) && (
+            {(isNasscomVerified || hasReport || isMyList || isBambooReports || hasContacts) && (
               <div className="mt-1 flex flex-wrap items-center gap-1.5">
                 {isNasscomVerified && (
                 <div
@@ -85,6 +86,14 @@ export const AccountRow = memo(({ account, isRecentlyUpdated = false, onClick }:
                   title="Source: Bamboo Reports"
                 >
                   Bamboo Reports
+                </div>
+                )}
+                {hasContacts && (
+                <div
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-sky-500/15 text-sky-700 dark:text-sky-300"
+                  title="Has contacts"
+                >
+                  Contacts
                 </div>
                 )}
               </div>
