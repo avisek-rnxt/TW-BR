@@ -55,7 +55,7 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, hasCo
               <div className="mt-2 flex flex-wrap items-center gap-1.5">
                 {isNasscomVerified && (
                 <div
-                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-green-500/15 text-green-700 dark:text-green-300"
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-red-500/15 text-red-700 dark:text-red-300"
                   title="NASSCOM listed"
                 >
                   <CircleCheck className="h-3 w-3 animate-pulse" aria-hidden="true" />
@@ -73,7 +73,7 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, hasCo
                 )}
                 {isMyList && (
                 <div
-                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#EF5F77]/15 text-[#EF5F77]"
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#003D4F]/15 text-[#003D4F] dark:text-[#4DB8CC]"
                   title="Source: My List"
                 >
                   My List
@@ -89,7 +89,7 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, hasCo
                 )}
                 {hasContacts && (
                 <div
-                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-sky-500/15 text-sky-700 dark:text-sky-300"
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-gray-500/15 text-gray-700 dark:text-gray-300"
                   title="Has contacts"
                 >
                   Contacts
