@@ -65,6 +65,16 @@ export function AccountsTab({
   setCurrentPage,
   itemsPerPage,
 }: AccountsTabProps) {
+  const accountNamesWithContacts = React.useMemo(() => {
+    const names = new Set<string>()
+    for (const prospect of prospects) {
+      if (prospect.account_global_legal_name) {
+        names.add(prospect.account_global_legal_name)
+      }
+    }
+    return names
+  }, [prospects])
+
   const [selectedAccount, setSelectedAccount] = useState<Account | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [sort, setSort] = useState<{
@@ -373,6 +383,7 @@ export function AccountsTab({
                           key={`${account.account_global_legal_name}-${index}`}
                           account={account}
                           isRecentlyUpdated={isAccountRecentlyUpdated(account)}
+                          hasContacts={accountNamesWithContacts.has(account.account_global_legal_name)}
                           onClick={() => handleAccountClick(account, "table_row")}
                         />
                       )
@@ -405,6 +416,7 @@ export function AccountsTab({
                           key={`${account.account_global_legal_name}-${index}`}
                           account={account}
                           isRecentlyUpdated={isAccountRecentlyUpdated(account)}
+                          hasContacts={accountNamesWithContacts.has(account.account_global_legal_name)}
                           onClick={() => handleAccountClick(account, "grid_card")}
                         />
                       )
