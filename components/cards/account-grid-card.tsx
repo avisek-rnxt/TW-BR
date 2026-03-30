@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { ArrowUpRight, CircleCheck, ExternalLink } from "lucide-react"
+import { ArrowUpRight, CircleCheck } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { CompanyLogo } from "@/components/ui/company-logo"
@@ -55,7 +55,7 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, hasCo
               <div className="mt-2 flex flex-wrap items-center gap-1.5">
                 {isNasscomVerified && (
                 <div
-                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-red-500/15 text-red-700 dark:text-red-300"
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#C03430]/15 text-[#C03430]"
                   title="NASSCOM listed"
                 >
                   <CircleCheck className="h-3 w-3 animate-pulse" aria-hidden="true" />
@@ -67,13 +67,12 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, hasCo
                   className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold bg-blue-500/15 text-blue-700 dark:text-blue-300"
                   title="Report available"
                 >
-                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                   Report
                 </div>
                 )}
                 {isMyList && (
                 <div
-                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#003D4F]/15 text-[#003D4F] dark:text-[#4DB8CC]"
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#FC798F]/15 text-[#FC798F]"
                   title="Source: My List"
                 >
                   My List
@@ -82,9 +81,9 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, hasCo
                 {isBambooReports && (
                 <div
                   className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#F17C1D]/15 text-[#F17C1D]"
-                  title="Source: Bamboo Reports"
+                  title="Source: BR List"
                 >
-                  Bamboo Reports
+                  BR List
                 </div>
                 )}
                 {hasContacts && (
