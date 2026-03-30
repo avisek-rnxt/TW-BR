@@ -17,6 +17,8 @@ export const AccountRow = memo(({ account, isRecentlyUpdated = false, onClick }:
     .join(", ")
   const isNasscomVerified = account.account_nasscom_status?.toLowerCase() === "yes"
   const hasReport = !!account.account_report_link
+  const isMyList = account.account_source === "My List"
+  const isBambooReports = account.account_source === "Bamboo Reports"
   const accountName = account.account_global_legal_name || "account"
 
   return (
@@ -49,7 +51,7 @@ export const AccountRow = memo(({ account, isRecentlyUpdated = false, onClick }:
                 <RecentlyUpdatedIndicator title="This account has unread recent updates" />
               ) : null}
             </div>
-            {(isNasscomVerified || hasReport) && (
+            {(isNasscomVerified || hasReport || isMyList || isBambooReports) && (
               <div className="mt-1 flex flex-wrap items-center gap-1.5">
                 {isNasscomVerified && (
                 <div
@@ -67,6 +69,22 @@ export const AccountRow = memo(({ account, isRecentlyUpdated = false, onClick }:
                 >
                   <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                   Report
+                </div>
+                )}
+                {isMyList && (
+                <div
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#EF5F77]/15 text-[#EF5F77]"
+                  title="Source: My List"
+                >
+                  My List
+                </div>
+                )}
+                {isBambooReports && (
+                <div
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-amber-500/15 text-amber-700 dark:text-amber-300"
+                  title="Source: Bamboo Reports"
+                >
+                  Bamboo Reports
                 </div>
                 )}
               </div>
