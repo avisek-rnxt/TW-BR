@@ -189,6 +189,29 @@ export function getFilteredData(
   const hasFunctionFilters = filters.functionNameValues.length > 0
   const hasCenterSoftwareFilters = filters.techSoftwareInUseKeywords.length > 0
 
+  let dataIncYearMin = Infinity
+  let dataIncYearMax = -Infinity
+  for (const center of centers) {
+    if (center.center_inc_year != null) {
+      if (center.center_inc_year < dataIncYearMin) dataIncYearMin = center.center_inc_year
+      if (center.center_inc_year > dataIncYearMax) dataIncYearMax = center.center_inc_year
+    }
+  }
+
+  const hasCenterFilters =
+    filters.centerTypeValues.length > 0 ||
+    filters.centerFocusValues.length > 0 ||
+    filters.centerCityValues.length > 0 ||
+    filters.centerStateValues.length > 0 ||
+    filters.centerCountryValues.length > 0 ||
+    filters.centerEmployeesRangeValues.length > 0 ||
+    filters.centerStatusValues.length > 0 ||
+    filters.centerIncYearRange[0] > dataIncYearMin ||
+    filters.centerIncYearRange[1] < dataIncYearMax ||
+    !filters.centerIncYearIncludeNull ||
+    hasFunctionFilters ||
+    hasCenterSoftwareFilters
+
   let filteredAccounts: Account[] = []
   let filteredCenters: Center[] = []
   let filteredFunctions: Function[] = []
@@ -291,18 +314,26 @@ export function getFilteredData(
     }
   }
 
-  const finalAccountNameSet = new Set<string>()
-  for (const center of filteredCenters) {
-    finalAccountNameSet.add(center.account_global_legal_name)
+  let finalFilteredAccounts: Account[]
+  let finalFilteredProspects: Prospect[]
+
+  if (hasCenterFilters) {
+    const finalAccountNameSet = new Set<string>()
+    for (const center of filteredCenters) {
+      finalAccountNameSet.add(center.account_global_legal_name)
+    }
+    finalFilteredAccounts = filteredAccounts.filter((account) =>
+      finalAccountNameSet.has(account.account_global_legal_name)
+    )
+    finalFilteredProspects = filteredProspects.filter((prospect) =>
+      finalAccountNameSet.has(prospect.account_global_legal_name)
+    )
+  } else {
+    finalFilteredAccounts = filteredAccounts
+    finalFilteredProspects = filteredProspects
   }
 
-  const finalFilteredAccounts = filteredAccounts.filter((account) =>
-    finalAccountNameSet.has(account.account_global_legal_name)
-  )
   const finalFilteredFunctions = filteredFunctions.filter((func) => centerKeySet.has(func.cn_unique_key))
-  const finalFilteredProspects = filteredProspects.filter((prospect) =>
-    finalAccountNameSet.has(prospect.account_global_legal_name)
-  )
 
   return {
     filteredAccounts: finalFilteredAccounts,

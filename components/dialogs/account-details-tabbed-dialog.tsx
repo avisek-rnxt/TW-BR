@@ -217,6 +217,18 @@ export function AccountDetailsDialog({
                         <Linkedin className="h-4 w-4" />
                       </a>
                     )}
+                    {account.account_report_link && (
+                      <a
+                        href={account.account_report_link.startsWith("http") ? account.account_report_link : `https://${account.account_report_link}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-blue-500/15 text-blue-700 dark:text-blue-300 hover:bg-blue-500/25 transition-colors"
+                        title="View Report"
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                        Report Available
+                      </a>
+                    )}
                   </div>
                 </div>
                 <p className="text-sm font-normal text-muted-foreground mt-1">
@@ -251,12 +263,14 @@ export function AccountDetailsDialog({
             {/* Account Info Tab */}
             <TabsContent value="info" className="space-y-6 mt-4">
               {/* Tech Stack & Centers Section */}
+              {(accountTech.length > 0 || accountCenters.length > 0) && (
               <div>
                 <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3 flex items-center gap-2">
                   <Info className="h-4 w-4" />
                   Tech Stack & Centers
                 </h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+                  {accountTech.length > 0 && (
                   <div className="rounded-lg border border-border/60 bg-background/40 backdrop-blur-sm shadow-sm overflow-hidden h-[300px] lg:h-[420px]">
                     <div className="flex h-full flex-col">
                       <div className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-muted-foreground border-b border-border/40">
@@ -268,6 +282,8 @@ export function AccountDetailsDialog({
                       </div>
                     </div>
                   </div>
+                  )}
+                  {accountCenters.length > 0 && (
                   <div className="rounded-lg border border-border/60 bg-background/40 backdrop-blur-sm shadow-sm overflow-hidden h-[300px] lg:h-[420px]">
                     <div className="flex h-full flex-col">
                       <div className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-muted-foreground border-b border-border/40">
@@ -279,8 +295,10 @@ export function AccountDetailsDialog({
                       </div>
                     </div>
                   </div>
+                  )}
                 </div>
               </div>
+              )}
 
               {/* Company Overview Section */}
               {(account.account_hq_company_type || account.account_hq_stock_ticker || account.account_about || account.account_hq_key_offerings) && (

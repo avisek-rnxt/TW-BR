@@ -385,6 +385,14 @@
         "Nullable": "YES",
         "Default": "",
         "PK": ""
+      },
+      {
+        "Table": "accounts",
+        "Column": "account_report_link",
+        "Type": "TEXT",
+        "Nullable": "YES",
+        "Default": "",
+        "PK": ""
       }
     ],
     "statistics": {

@@ -171,7 +171,7 @@ export const FILTER_SECTIONS: FilterSectionConfig[] = [
       {
         key: "accountSourceValues",
         label: "Source",
-        enabled: false,
+        enabled: true,
         type: "multi-select",
         column: "account_source",
         table: "accounts",
@@ -179,7 +179,7 @@ export const FILTER_SECTIONS: FilterSectionConfig[] = [
       {
         key: "accountTypeValues",
         label: "Type",
-        enabled: false,
+        enabled: true,
         type: "multi-select",
         column: "account_type",
         table: "accounts",
@@ -187,7 +187,7 @@ export const FILTER_SECTIONS: FilterSectionConfig[] = [
       {
         key: "accountDataCoverageValues",
         label: "Coverage",
-        enabled: false,
+        enabled: true,
         type: "multi-select",
         column: "account_data_coverage",
         table: "accounts",

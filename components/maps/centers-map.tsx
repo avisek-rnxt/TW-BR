@@ -413,9 +413,8 @@ export function CentersMap({ centers, heightClass = "h-[750px]" }: CentersMapPro
     return (
       <div className={`flex items-center justify-center ${heightClass} bg-muted rounded-lg`}>
         <div className="text-center">
-          <p className="text-lg font-semibold text-muted-foreground mb-2">No Location Data</p>
           <p className="text-sm text-muted-foreground">
-            Centers do not have latitude and longitude information
+            Please switch to Data view instead
           </p>
         </div>
       </div>

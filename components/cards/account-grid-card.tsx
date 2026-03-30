@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { ArrowUpRight, CircleCheck } from "lucide-react"
+import { ArrowUpRight, CircleCheck, ExternalLink } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { CompanyLogo } from "@/components/ui/company-logo"
@@ -18,6 +18,7 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, onCli
     .join(", ")
   const accountName = account.account_global_legal_name || "Account"
   const isNasscomVerified = account.account_nasscom_status?.toLowerCase() === "yes"
+  const hasReport = !!account.account_report_link
 
   return (
     <Card className="h-full">
@@ -47,8 +48,9 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, onCli
             >
               {location || account.account_hq_country || "-"}
             </p>
-            {isNasscomVerified && (
+            {(isNasscomVerified || hasReport) && (
               <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                {isNasscomVerified && (
                 <div
                   className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-green-500/15 text-green-700 dark:text-green-300"
                   title="NASSCOM listed"
@@ -56,6 +58,16 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, onCli
                   <CircleCheck className="h-3 w-3 animate-pulse" aria-hidden="true" />
                   NASSCOM
                 </div>
+                )}
+                {hasReport && (
+                <div
+                  className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold bg-blue-500/15 text-blue-700 dark:text-blue-300"
+                  title="Report available"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                  Report
+                </div>
+                )}
               </div>
             )}
           </div>
