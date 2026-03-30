@@ -43,6 +43,7 @@ interface FiltersSidebarProps {
   getTotalActiveFilters: () => number
   handleLoadSavedFilters: (savedFilters: Filters) => void
   formatRevenueInMillions: (value: number) => string
+  onSectionSelect?: (section: "accounts" | "centers" | "prospects") => void
 }
 
 export function FiltersSidebar({
@@ -72,6 +73,7 @@ export function FiltersSidebar({
   getTotalActiveFilters,
   handleLoadSavedFilters,
   formatRevenueInMillions,
+  onSectionSelect,
 }: FiltersSidebarProps): JSX.Element {
   const [activeFilter, setActiveFilter] = useState<string | null>(null)
   const [openSections, setOpenSections] = useState<string[]>(['accounts'])
@@ -110,6 +112,9 @@ export function FiltersSidebar({
     setOpenSections([section])
     if (isCollapsed) {
       onToggleCollapse()
+    }
+    if (onSectionSelect && (section === "accounts" || section === "centers" || section === "prospects")) {
+      onSectionSelect(section)
     }
   }
 
@@ -215,7 +220,13 @@ export function FiltersSidebar({
           </div>
         </div>
 
-        <Accordion type="multiple" value={openSections} onValueChange={setOpenSections} className="w-full space-y-2">
+        <Accordion type="multiple" value={openSections} onValueChange={(values) => {
+          const newlyOpened = values.find((v) => !openSections.includes(v))
+          setOpenSections(values)
+          if (newlyOpened && onSectionSelect && (newlyOpened === "accounts" || newlyOpened === "centers" || newlyOpened === "prospects")) {
+            onSectionSelect(newlyOpened)
+          }
+        }} className="w-full space-y-2">
           {isSectionVisible("accounts") && (
           <AccordionItem value="accounts" className="overflow-hidden rounded-xl border border-border/70 bg-secondary/30 px-3 data-[state=open]:bg-background data-[state=open]:shadow-sm">
             <AccordionTrigger className="py-3 text-sm font-semibold hover:no-underline">

@@ -31,6 +31,8 @@ import {
   Layers,
   ExternalLink,
   Linkedin,
+  CircleCheck,
+  Download,
 } from "lucide-react"
 import { formatRevenueInMillions, parseRevenue } from "@/lib/utils/helpers"
 import { InfoRow } from "@/components/ui/info-row"
@@ -107,7 +109,13 @@ export function AccountDetailsDialog({
     ? centers.filter((center) => center.account_global_legal_name === account.account_global_legal_name)
     : []
   const accountProspects = account
-    ? prospects.filter((prospect) => prospect.account_global_legal_name === account.account_global_legal_name)
+    ? prospects
+        .filter((prospect) => prospect.account_global_legal_name === account.account_global_legal_name)
+        .sort((a, b) => {
+          const nameA = `${a.prospect_first_name ?? ""} ${a.prospect_last_name ?? ""}`.trim().toLowerCase()
+          const nameB = `${b.prospect_first_name ?? ""} ${b.prospect_last_name ?? ""}`.trim().toLowerCase()
+          return nameA.localeCompare(nameB)
+        })
     : []
   const accountTech = account
     ? tech.filter((item) => item.account_global_legal_name === account.account_global_legal_name)
@@ -217,22 +225,58 @@ export function AccountDetailsDialog({
                         <Linkedin className="h-4 w-4" />
                       </a>
                     )}
-                    {account.account_report_link && (
-                      <a
-                        href={account.account_report_link.startsWith("http") ? account.account_report_link : `https://${account.account_report_link}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 rounded-full px-4 py-1 text-[11px] font-semibold bg-blue-500/15 text-blue-700 dark:text-blue-300 hover:bg-blue-500/25 transition-colors"
-                        title="View Report"
-                      >
-                        Report Available
-                      </a>
-                    )}
                   </div>
                 </div>
                 <p className="text-sm font-normal text-muted-foreground mt-1">
                   {location || account.account_hq_region}
                 </p>
+                <div className="flex flex-wrap items-center gap-1.5 mt-2">
+                  {account.account_nasscom_status?.toLowerCase() === "yes" && (
+                    <div
+                      className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold bg-[#C03430]/15 text-[#C03430]"
+                      title="NASSCOM listed"
+                    >
+                      <CircleCheck className="h-3 w-3 animate-pulse" aria-hidden="true" />
+                      NASSCOM GCC
+                    </div>
+                  )}
+                  {account.account_source === "My List" && (
+                    <div
+                      className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold bg-[#FC798F]/15 text-[#FC798F]"
+                      title="Source: My List"
+                    >
+                      My List
+                    </div>
+                  )}
+                  {account.account_source === "Bamboo Reports List" && (
+                    <div
+                      className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold bg-[#F17C1D]/15 text-[#F17C1D]"
+                      title="Source: BR Net New List"
+                    >
+                      BR Net New List
+                    </div>
+                  )}
+                  {accountProspects.length > 0 && (
+                    <div
+                      className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold bg-gray-500/15 text-gray-700 dark:text-gray-300"
+                      title="Has contacts"
+                    >
+                      Contacts
+                    </div>
+                  )}
+                  {account.account_report_link && (
+                    <a
+                      href={account.account_report_link.startsWith("http") ? account.account_report_link : `https://${account.account_report_link}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold bg-blue-500/15 text-blue-700 dark:text-blue-300 hover:bg-blue-500/25 transition-colors"
+                      title="Report available"
+                    >
+                      <Download className="h-3 w-3" aria-hidden="true" />
+                      Report
+                    </a>
+                  )}
+                </div>
               </div>
             </DialogTitle>
           </DialogHeader>

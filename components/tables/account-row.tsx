@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { CircleCheck } from "lucide-react"
+import { CircleCheck, Download } from "lucide-react"
 import { TableRow, TableCell } from "@/components/ui/table"
 import type { Account } from "@/lib/types"
 import { CompanyLogo } from "@/components/ui/company-logo"
@@ -19,7 +19,7 @@ export const AccountRow = memo(({ account, isRecentlyUpdated = false, hasContact
   const isNasscomVerified = account.account_nasscom_status?.toLowerCase() === "yes"
   const hasReport = !!account.account_report_link
   const isMyList = account.account_source === "My List"
-  const isBambooReports = account.account_source === "Bamboo Reports"
+  const isBambooReports = account.account_source === "Bamboo Reports List"
   const accountName = account.account_global_legal_name || "account"
 
   return (
@@ -63,14 +63,6 @@ export const AccountRow = memo(({ account, isRecentlyUpdated = false, hasContact
                   NASSCOM
                 </div>
                 )}
-                {hasReport && (
-                <div
-                  className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold bg-blue-500/15 text-blue-700 dark:text-blue-300"
-                  title="Report available"
-                >
-                  Report
-                </div>
-                )}
                 {isMyList && (
                 <div
                   className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#FC798F]/15 text-[#FC798F]"
@@ -82,9 +74,9 @@ export const AccountRow = memo(({ account, isRecentlyUpdated = false, hasContact
                 {isBambooReports && (
                 <div
                   className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#F17C1D]/15 text-[#F17C1D]"
-                  title="Source: BR List"
+                  title="Source: BR Net New List"
                 >
-                  BR List
+                  BR Net New List
                 </div>
                 )}
                 {hasContacts && (
@@ -93,6 +85,15 @@ export const AccountRow = memo(({ account, isRecentlyUpdated = false, hasContact
                   title="Has contacts"
                 >
                   Contacts
+                </div>
+                )}
+                {hasReport && (
+                <div
+                  className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold bg-blue-500/15 text-blue-700 dark:text-blue-300"
+                  title="Report available"
+                >
+                  <Download className="h-3 w-3" aria-hidden="true" />
+                  Report
                 </div>
                 )}
               </div>

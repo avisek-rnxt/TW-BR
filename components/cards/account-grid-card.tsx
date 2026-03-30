@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { ArrowUpRight, CircleCheck } from "lucide-react"
+import { ArrowUpRight, CircleCheck, Download } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { CompanyLogo } from "@/components/ui/company-logo"
@@ -21,7 +21,7 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, hasCo
   const isNasscomVerified = account.account_nasscom_status?.toLowerCase() === "yes"
   const hasReport = !!account.account_report_link
   const isMyList = account.account_source === "My List"
-  const isBambooReports = account.account_source === "Bamboo Reports"
+  const isBambooReports = account.account_source === "Bamboo Reports List"
 
   return (
     <Card className="h-full">
@@ -67,6 +67,7 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, hasCo
                   className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold bg-blue-500/15 text-blue-700 dark:text-blue-300"
                   title="Report available"
                 >
+                  <Download className="h-3 w-3" aria-hidden="true" />
                   Report
                 </div>
                 )}
@@ -81,9 +82,9 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, hasCo
                 {isBambooReports && (
                 <div
                   className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#F17C1D]/15 text-[#F17C1D]"
-                  title="Source: BR List"
+                  title="Source: BR Net New List"
                 >
-                  BR List
+                  BR Net New List
                 </div>
                 )}
                 {hasContacts && (
