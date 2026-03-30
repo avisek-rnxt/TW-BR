@@ -179,7 +179,7 @@ export const FILTER_SECTIONS: FilterSectionConfig[] = [
       {
         key: "accountTypeValues",
         label: "Type",
-        enabled: false,
+        enabled: true,
         type: "multi-select",
         column: "account_type",
         table: "accounts",

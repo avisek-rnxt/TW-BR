@@ -36,6 +36,7 @@ Notable columns:
 - Workforce: `account_hq_employee_count`, `account_hq_employee_range`, `account_hq_employee_source_type`, `account_hq_employee_source_link`, `account_center_employees`, `account_center_employees_range`
 - India timeline: `account_first_center_year`, `years_in_india`
 - Notes and coverage: `account_comments`, `account_coverage`
+- Report: `account_report_link`
 
 ### 2.2 Table: `centers`
 Description: Delivery centers or office locations.

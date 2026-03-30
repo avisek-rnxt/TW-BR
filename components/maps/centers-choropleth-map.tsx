@@ -526,7 +526,7 @@ export function CentersChoroplethMap({
     return (
       <div className={`flex items-center justify-center ${heightClass} bg-muted rounded-lg`}>
         <div className="text-center">
-          <p className="text-sm text-muted-foreground">No state boundaries to display.</p>
+          <p className="text-sm text-muted-foreground">Please switch to Data view instead</p>
         </div>
       </div>
     )

@@ -56,7 +56,7 @@ const AnimatedNumber = React.memo(function AnimatedNumber({
       const baseValue = startValueRef.current + (value - startValueRef.current) * eased
       const overshoot = Math.sin(t * Math.PI) * (value - startValueRef.current) * 0.018
       const nextValue = baseValue + overshoot
-      setDisplayValue(Math.round(nextValue))
+      setDisplayValue(Math.round(nextValue) || 0)
 
       if (progress < 1) {
         frameRef.current = requestAnimationFrame(step)

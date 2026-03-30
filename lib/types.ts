@@ -45,6 +45,7 @@ export interface Account {
   account_center_employees_range?: string | null
   account_comments?: string | null
   account_coverage?: string | null
+  account_report_link?: string | null
 }
 
 export interface Center {
