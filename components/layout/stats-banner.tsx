@@ -1,22 +1,22 @@
 "use client"
 
 import React, { useState, useCallback, useEffect } from "react"
-import { Building2, Users, Bell, RefreshCw, CheckCircle2 } from "lucide-react"
+import { Bell, RefreshCw, CheckCircle2, Briefcase, Database } from "lucide-react"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import { requestUpdate } from "@/app/actions/request-update"
 
 const stats = [
   {
-    icon: Building2,
-    label: "New GCC Centres Added",
-    value: 5,
-    detail: "Earlier 63 → Now 68 Total Centres",
+    icon: Briefcase,
+    label: "Accounts with Centres & Prospects",
+    value: 44,
+    detail: "68 Centres, 429 Contacts",
   },
   {
-    icon: Users,
-    label: "New Contacts Added",
-    value: 82,
-    detail: "Earlier 364 → Now 446 Total Contacts",
+    icon: Database,
+    label: "Overall Database",
+    value: "",
+    detail: "1,050 Accounts | 1,736 Centres | 17,800 Contacts",
   },
 ]
 
@@ -61,6 +61,24 @@ export function StatsBanner() {
     }
   }, [sending, sent, userName, userEmail])
 
+  const renderStats = (items: typeof stats) => (
+    <div className="flex flex-1 items-center gap-6">
+      {items.map((stat, i) => (
+        <React.Fragment key={i}>
+          {i > 0 && <div className="h-3 w-px bg-border/40 shrink-0" />}
+          <div className="inline-flex shrink-0 items-center gap-2 text-sm">
+            <stat.icon className="h-3.5 w-3.5 text-primary" />
+            {stat.value && <span className="font-semibold text-primary">{stat.value}</span>}
+            <span className="text-muted-foreground">{stat.label}</span>
+            <span className="text-xs text-muted-foreground/70">
+              ({stat.detail})
+            </span>
+          </div>
+        </React.Fragment>
+      ))}
+    </div>
+  )
+
   return (
     <div className="relative border-b border-border/60 bg-primary/5">
       <div className="flex items-center py-1.5 px-4 gap-4">
@@ -69,21 +87,7 @@ export function StatsBanner() {
           <span className="text-xs font-semibold uppercase tracking-wide text-primary">Updates</span>
         </div>
         <div className="h-4 w-px bg-border/60 shrink-0" />
-        <div className="flex flex-1 items-center gap-6">
-          {stats.map((stat, i) => (
-            <React.Fragment key={i}>
-              {i > 0 && <div className="h-3 w-px bg-border/40 shrink-0" />}
-              <div className="inline-flex shrink-0 items-center gap-2 text-sm">
-                <stat.icon className="h-3.5 w-3.5 text-primary" />
-                <span className="font-semibold text-primary">{stat.value}</span>
-                <span className="text-muted-foreground">{stat.label}</span>
-                <span className="text-xs text-muted-foreground/70">
-                  ({stat.detail})
-                </span>
-              </div>
-            </React.Fragment>
-          ))}
-        </div>
+        {renderStats(stats)}
         <div className="flex items-center gap-2 shrink-0">
           {showSuccess && (
             <div className="inline-flex items-center gap-1.5 text-xs font-medium text-green-600 dark:text-green-400 animate-in fade-in slide-in-from-right-2 duration-300">
