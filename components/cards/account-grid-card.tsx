@@ -9,10 +9,11 @@ import type { Account } from "@/lib/types"
 interface AccountGridCardProps {
   account: Account
   isRecentlyUpdated?: boolean
+  hasContacts?: boolean
   onClick: () => void
 }
 
-export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, onClick }: AccountGridCardProps) => {
+export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, hasContacts = false, onClick }: AccountGridCardProps) => {
   const location = [account.account_hq_city, account.account_hq_country]
     .filter(Boolean)
     .join(", ")
@@ -50,11 +51,11 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, onCli
             >
               {location || account.account_hq_country || "-"}
             </p>
-            {(isNasscomVerified || hasReport || isMyList || isBambooReports) && (
+            {(isNasscomVerified || hasReport || isMyList || isBambooReports || hasContacts) && (
               <div className="mt-2 flex flex-wrap items-center gap-1.5">
                 {isNasscomVerified && (
                 <div
-                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-green-500/15 text-green-700 dark:text-green-300"
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-red-500/15 text-red-700 dark:text-red-300"
                   title="NASSCOM listed"
                 >
                   <CircleCheck className="h-3 w-3 animate-pulse" aria-hidden="true" />
@@ -72,7 +73,7 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, onCli
                 )}
                 {isMyList && (
                 <div
-                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#EF5F77]/15 text-[#EF5F77]"
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-[#003D4F]/15 text-[#003D4F] dark:text-[#4DB8CC]"
                   title="Source: My List"
                 >
                   My List
@@ -84,6 +85,14 @@ export const AccountGridCard = memo(({ account, isRecentlyUpdated = false, onCli
                   title="Source: Bamboo Reports"
                 >
                   Bamboo Reports
+                </div>
+                )}
+                {hasContacts && (
+                <div
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-gray-500/15 text-gray-700 dark:text-gray-300"
+                  title="Has contacts"
+                >
+                  Contacts
                 </div>
                 )}
               </div>
