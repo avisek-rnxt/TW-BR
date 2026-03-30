@@ -87,6 +87,7 @@ Columns:
 - `uuid`
 - `last_update_date`
 - `account_global_legal_name`
+- `company_name_moved_to`
 - `center_name`
 - `prospect_full_name`, `prospect_first_name`, `prospect_last_name`
 - `prospect_title`, `prospect_department`, `prospect_level`

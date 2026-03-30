@@ -133,6 +133,7 @@ export interface Prospect {
   uuid?: string | null
   last_update_date?: string | null
   account_global_legal_name: string
+  company_name_moved_to: string | null
   center_name: string | null
   prospect_full_name?: string | null
   prospect_first_name: string | null

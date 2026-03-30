@@ -412,6 +412,7 @@ Shows a list of prospects/contacts for this account, each displaying:
 | UI Label | Database Column | Table |
 |----------|----------------|-------|
 | Account Name | `account_global_legal_name` | `prospects` |
+| Company Name Moved To | `company_name_moved_to` | `prospects` |
 | Center Name | `center_name` | `prospects` |
 
 **Location Section:**
@@ -617,6 +618,7 @@ Exports columns from the `prospects` table:
 | City | `prospect_city` |
 | Country | `prospect_country` |
 | Account | `account_global_legal_name` |
+| Company Name Moved To | `company_name_moved_to` |
 
 > **Access:** Export is restricted to users with the `admin` role (checked via `canExportData()` in `lib/auth/roles.ts`).
 
