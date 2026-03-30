@@ -557,6 +557,7 @@ function DashboardContent(): JSX.Element | null {
             getTotalActiveFilters={getTotalActiveFilters}
             handleLoadSavedFilters={handleLoadSavedFilters}
             formatRevenueInMillions={formatRevenueInMillions}
+            onSectionSelect={handleSectionSelect}
           />
 
           <div className="flex-1 overflow-hidden flex flex-col">

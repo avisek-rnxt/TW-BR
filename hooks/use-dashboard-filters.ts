@@ -326,28 +326,28 @@ export function useDashboardFilters({
 
   const handleMinRevenueChange = useCallback(
     (value: string) => {
-      const numValue = Number.parseFloat(value) || revenueRange.min
-      const clampedValue = Math.max(revenueRange.min, Math.min(numValue, pendingFilters.accountHqRevenueRange[1]))
+      const numValue = Number.parseFloat(value)
+      if (Number.isNaN(numValue)) return
       isRevenueRangeAutoRef.current = false
       setPendingFilters((prev) => ({
         ...prev,
-        accountHqRevenueRange: [clampedValue, prev.accountHqRevenueRange[1]],
+        accountHqRevenueRange: [numValue, prev.accountHqRevenueRange[1]],
       }))
     },
-    [pendingFilters.accountHqRevenueRange, revenueRange]
+    []
   )
 
   const handleMaxRevenueChange = useCallback(
     (value: string) => {
-      const numValue = Number.parseFloat(value) || revenueRange.max
-      const clampedValue = Math.min(revenueRange.max, Math.max(numValue, pendingFilters.accountHqRevenueRange[0]))
+      const numValue = Number.parseFloat(value)
+      if (Number.isNaN(numValue)) return
       isRevenueRangeAutoRef.current = false
       setPendingFilters((prev) => ({
         ...prev,
-        accountHqRevenueRange: [prev.accountHqRevenueRange[0], clampedValue],
+        accountHqRevenueRange: [prev.accountHqRevenueRange[0], numValue],
       }))
     },
-    [pendingFilters.accountHqRevenueRange, revenueRange]
+    []
   )
 
   const handleRevenueRangeChange = useCallback((value: [number, number]) => {
