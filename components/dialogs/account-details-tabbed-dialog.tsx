@@ -222,10 +222,9 @@ export function AccountDetailsDialog({
                         href={account.account_report_link.startsWith("http") ? account.account_report_link : `https://${account.account_report_link}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-blue-500/15 text-blue-700 dark:text-blue-300 hover:bg-blue-500/25 transition-colors"
+                        className="inline-flex items-center gap-1 rounded-full px-4 py-1 text-[11px] font-semibold bg-blue-500/15 text-blue-700 dark:text-blue-300 hover:bg-blue-500/25 transition-colors"
                         title="View Report"
                       >
-                        <ExternalLink className="h-3 w-3" />
                         Report Available
                       </a>
                     )}
