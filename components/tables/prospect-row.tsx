@@ -1,5 +1,6 @@
 import { memo } from "react"
 import { TableRow, TableCell } from "@/components/ui/table"
+import { Badge } from "@/components/ui/badge"
 import type { Prospect } from "@/lib/types"
 import { RecentlyUpdatedIndicator } from "@/components/ui/recently-updated-indicator"
 
@@ -41,11 +42,18 @@ export const ProspectRow = memo(({ prospect, isRecentlyUpdated = false, onClick 
         </div>
       </TableCell>
       <TableCell className="font-medium max-w-[220px]">
-        <div className="min-w-0 flex items-center gap-2">
-          <div className="min-w-0 flex-1 truncate" title={fullName || "N/A"}>
-            {fullName || "N/A"}
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            <div className="min-w-0 flex-1 truncate" title={fullName || "N/A"}>
+              {fullName || "N/A"}
+            </div>
+            {isRecentlyUpdated ? <RecentlyUpdatedIndicator title="This prospect has unread recent updates" /> : null}
           </div>
-          {isRecentlyUpdated ? <RecentlyUpdatedIndicator title="This prospect has unread recent updates" /> : null}
+          {prospect.company_name_moved_to ? (
+            <Badge variant="outline" className="text-[10px] h-5 px-1.5 mt-1 max-w-full truncate bg-amber-500/10 text-amber-700 border-amber-500/30 dark:text-amber-400 dark:border-amber-400/30 dark:bg-amber-400/10" title={`Moved to ${prospect.company_name_moved_to}`}>
+              Moved to {prospect.company_name_moved_to}
+            </Badge>
+          ) : null}
         </div>
       </TableCell>
       <TableCell className="max-w-[200px]">

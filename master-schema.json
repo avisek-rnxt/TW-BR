@@ -935,6 +935,14 @@
       },
       {
         "Table": "prospects",
+        "Column": "company_name_moved_to",
+        "Type": "TEXT",
+        "Nullable": "YES",
+        "Default": "",
+        "PK": ""
+      },
+      {
+        "Table": "prospects",
         "Column": "center_name",
         "Type": "TEXT",
         "Nullable": "YES",

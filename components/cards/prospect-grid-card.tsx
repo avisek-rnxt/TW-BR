@@ -2,6 +2,7 @@ import { memo } from "react"
 import { ArrowUpRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import { RecentlyUpdatedIndicator } from "@/components/ui/recently-updated-indicator"
 import type { Prospect } from "@/lib/types"
 
@@ -25,9 +26,9 @@ export const ProspectGridCard = memo(({ prospect, isRecentlyUpdated = false, onC
 
   return (
     <Card className="h-full">
-      <CardContent className="p-4 flex flex-col gap-4">
+      <CardContent className="p-4 flex flex-col gap-4 h-full">
         <div className="flex items-start gap-3">
-          <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
             <span className="text-sm font-bold text-primary">{initials || "?"}</span>
           </div>
           <div className="min-w-0">
@@ -48,8 +49,14 @@ export const ProspectGridCard = memo(({ prospect, isRecentlyUpdated = false, onC
             >
               {location || prospect.prospect_country || "-"}
             </p>
+            {prospect.company_name_moved_to ? (
+              <Badge variant="outline" className="mt-1.5 text-[10px] h-5 px-1.5 bg-amber-500/10 text-amber-700 border-amber-500/30 dark:text-amber-400 dark:border-amber-400/30 dark:bg-amber-400/10 truncate max-w-full" title={`Moved to ${prospect.company_name_moved_to}`}>
+                Moved to {prospect.company_name_moved_to}
+              </Badge>
+            ) : null}
           </div>
         </div>
+        <div className="mt-auto flex flex-col gap-4">
         <div className="space-y-2 text-sm">
           <div className="flex items-center justify-between gap-3 min-w-0">
             <span className="text-muted-foreground">Job Title</span>
@@ -80,6 +87,7 @@ export const ProspectGridCard = memo(({ prospect, isRecentlyUpdated = false, onC
           View Details
           <ArrowUpRight className="h-4 w-4" />
         </Button>
+        </div>
       </CardContent>
     </Card>
   )

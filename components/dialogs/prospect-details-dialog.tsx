@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Mail, Linkedin, MapPin, Building2, Briefcase, Users, Award } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 import type { Prospect } from "@/lib/types"
 
 interface ProspectDetailsDialogProps {
@@ -61,7 +62,12 @@ export function ProspectDetailsDialog({
               </span>
             </div>
             <div>
-              {prospect.prospect_first_name} {prospect.prospect_last_name}
+              <div>{prospect.prospect_first_name} {prospect.prospect_last_name}</div>
+              {prospect.company_name_moved_to ? (
+                <Badge variant="outline" className="text-[10px] font-medium h-5 px-1.5 mt-1 bg-amber-500/10 text-amber-700 border-amber-500/30 dark:text-amber-400 dark:border-amber-400/30 dark:bg-amber-400/10">
+                  Moved to {prospect.company_name_moved_to}
+                </Badge>
+              ) : null}
             </div>
           </DialogTitle>
         </DialogHeader>
